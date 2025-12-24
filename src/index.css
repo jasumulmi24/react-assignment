@@ -81,6 +81,35 @@ button:focus-visible {
   color: rgb(255, 69, 69);
 }
 
+.expense-form {
+  display: flex;
+  gap: 10px; /* space between fields */
+  flex-wrap: wrap; /* wrap to next line if screen is small */
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+}
+
+.expense-form input,
+.expense-form select,
+.expense-form button {
+  padding: 8px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.expense-form button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.expense-form button:hover {
+  background-color: #1e40af;
+}
+
 
 
 
