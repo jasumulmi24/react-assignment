@@ -24,7 +24,6 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
@@ -66,3 +65,22 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+
+.navbar a {
+  color: #1a4499;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.navbar a.active {
+  border-bottom-color: #2563eb; /* only colored when active */
+  color: rgb(255, 69, 69);
+}
+
+
+
+
