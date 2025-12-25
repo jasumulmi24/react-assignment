@@ -1,8 +1,4 @@
-import type Expense from "../../models/expense.type";
-
-type ExpenseListProps = {
-  expenses: Expense[];
-};
+import type { ExpenseListProps } from "../../types/ExpenseListProps";
 
 const ExpenseList = ({ expenses }: ExpenseListProps) => {
   if (!expenses.length) {

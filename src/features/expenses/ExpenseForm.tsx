@@ -10,7 +10,7 @@ const ExpenseForm = ({addExpense} : any) => {
        if(!form.category) return;
        if(!form.date) return;
         
-       var model = { title: form.title, amount: form.amount, category: form.category, date: form.date };
+       var model = { title: form.title, amount: Number(form.amount), category: form.category, date: form.date };
        addExpense(model);
 
        setForm({ title: "", amount: "", category: "", date: ""});

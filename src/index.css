@@ -142,5 +142,28 @@ button:focus-visible {
   font-weight: 500;
 }
 
+.expense-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: 1rem;
+  padding: 1rem 1.25rem;
+
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.expense-summary .label {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.expense-summary .amount {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2563eb;
+}
 
 
