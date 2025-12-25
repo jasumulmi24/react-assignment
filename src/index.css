@@ -110,6 +110,37 @@ button:focus-visible {
   background-color: #1e40af;
 }
 
+.expense-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+.expense-table th,
+.expense-table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.expense-table thead {
+  background-color: #f3f4f6;
+}
+
+.expense-table th {
+  font-weight: 600;
+  color: #374151;
+}
+
+.expense-table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.expense-table td:nth-child(2) {
+  color: #2563eb;
+  font-weight: 500;
+}
 
 
 
