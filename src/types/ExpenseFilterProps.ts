@@ -5,5 +5,4 @@ export type ExpenseFilterProps = {
     category: string;
     date: string;
   }) => void;
-  handleReset: void
 };
