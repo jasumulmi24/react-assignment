@@ -166,4 +166,45 @@ button:focus-visible {
   color: #2563eb;
 }
 
+.expense-filter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Common style */
+.expense-filter select,
+.expense-filter input[type="date"] {
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+}
+
+/* Remove ugly date icon spacing (Chrome) */
+.expense-filter input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
+
+/* Focus state */
+.expense-filter select:focus,
+.expense-filter input[type="date"]:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+/* Reset button */
+.expense-filter button {
+  height: 38px;
+  padding: 0 14px;
+  b
+
+
 

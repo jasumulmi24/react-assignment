@@ -8,6 +8,21 @@ import ExpenseFilter from "../features/expenses/ExpenseFilter";
 const Expenses = () => {
 
   const [expenses, setExpenses] = useState<Expense[]>([]);
+  const [filters, setFilters] = useState({
+    category: "",
+    date: "",
+  });
+
+  const filteredExpenses = expenses.filter((expense) => {
+    const matchCategory =
+      !filters.category || expense.category === filters.category;
+
+    const matchDate =
+      !filters.date || expense.date === filters.date;
+
+    return matchCategory && matchDate;
+  });
+
 
   const handleAddExpense = (expense: Expense) => {
     setExpenses(prev => [...prev, expense]);
@@ -16,10 +31,14 @@ const Expenses = () => {
 return(
   <>
     <h2>Expense Tracker</h2>
-    <ExpenseFilter/>
+     <ExpenseFilter
+        selectedCategory={filters.category}
+        selectedDate={filters.date}
+        onFilterChange={setFilters}
+      />
     <ExpenseForm addExpense={handleAddExpense}/>
-    <ExpenseList expenses={expenses}/>
-    <ExpenseSummary expenses={expenses}/>
+    <ExpenseList expenses={filteredExpenses}/>
+    <ExpenseSummary expenses={filteredExpenses}/>
   </>
   ) 
 }
