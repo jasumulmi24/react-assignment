@@ -6,6 +6,7 @@ import Expenses from './pages/Expenses';
 import Weather from './pages/Weather';
 import NotFound from './pages/NotFound';
 import { WeatherProvider } from './context/WeatherContext';
+import { ExpenseProvider } from './context/ExpenseContext';
 
 
 const router = createBrowserRouter([
@@ -35,12 +36,12 @@ const router = createBrowserRouter([
 
 function App() {
    return <>
-    <WeatherProvider>
+      <ExpenseProvider>
+      <WeatherProvider>
          <RouterProvider router={router} />
-    </WeatherProvider>
+      </WeatherProvider>
+      </ExpenseProvider>
    </> 
- 
-
 }
 
 export default App

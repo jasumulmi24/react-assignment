@@ -1,9 +1,8 @@
 import type { ExpenseListProps } from "../../types/ExpenseListProps";
+import { memo } from "react";
 
-const ExpenseList = ({ expenses }: ExpenseListProps) => {
-  if (!expenses.length) {
-    return <p>No expenses yet.</p>;
-  }
+const ExpenseList = memo(({ expenses }: ExpenseListProps) => {
+  if (!expenses.length) return <p>No expenses yet.</p>;
 
   return (
     <table className="expense-table">
@@ -15,9 +14,8 @@ const ExpenseList = ({ expenses }: ExpenseListProps) => {
           <th>Date</th>
         </tr>
       </thead>
-
       <tbody>
-        {expenses.map((x) => (
+        {expenses.map(x => (
           <tr key={x.id}>
             <td>{x.title}</td>
             <td>Rs. {x.amount}</td>
@@ -28,6 +26,6 @@ const ExpenseList = ({ expenses }: ExpenseListProps) => {
       </tbody>
     </table>
   );
-};
+});
 
 export default ExpenseList;
