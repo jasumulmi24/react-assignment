@@ -1,59 +1,98 @@
 import { useState } from "react";
 
-const ExpenseForm = ({addExpense} : any) => {
-   const [form, setForm] = useState({title: "",amount: "",category: "", date: ""});
-    
-   const handleFormSubmit = (e: any) => {
-       e.preventDefault();
-       if(!form.title) return;
-       if(!form.amount) return;
-       if(!form.category) return;
-       if(!form.date) return;
-        
-       var model = { title: form.title, amount: Number(form.amount), category: form.category, date: form.date };
-       addExpense(model);
+type ExpenseFormProps = {
+  addExpense: (expense: { title: string; amount: number; category: string; date: string }) => void;
+};
 
-       setForm({ title: "", amount: "", category: "", date: ""});
+const ExpenseForm = ({ addExpense }: ExpenseFormProps) => {
+  const [form, setForm] = useState({ title: "", amount: "", category: "", date: "" });
+  const [errors, setErrors] = useState({ title: "", amount: "", category: "", date: "" });
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const newErrors = {
+      title: form.title ? "" : "Title is required",
+      amount: form.amount ? "" : "Amount is required",
+      category: form.category ? "" : "Category is required",
+      date: form.date ? "" : "Date is required",
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        setForm(prev => ({
-            ...prev,
-            [e.target.name]: e.target.value
-        })
-    )};
+    setErrors(newErrors);
 
-    return (
-        <form className="expense-form" onSubmit={handleFormSubmit}>
+    if (Object.values(newErrors).some(err => err)) return;
+
+    addExpense({ title: form.title, amount: Number(form.amount), category: form.category, date: form.date });
+
+    setForm({ title: "", amount: "", category: "", date: "" });
+    setErrors({ title: "", amount: "", category: "", date: "" });
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    setErrors(prev => ({ ...prev, [e.target.name]: "" }));
+  };
+
+  return (
+    <form className="expense-form" onSubmit={handleFormSubmit}>
+      <div>
         <input
-            type="text"
-            name="title"
-            placeholder="Title"
-            onChange={handleChange}
-            value={form.title}
+          type="text"
+          name="title"
+          placeholder="Title"
+          value={form.title}
+          onChange={handleChange}
+          className={errors.title ? "invalid" : ""}
         />
+        <span className="expense-error">{errors.title || "\u00A0"}</span>
+      </div>
 
+      <div>
         <input
-            type="number"
-            name="amount"
-            placeholder="Amount"
-            onChange={handleChange}
-            value={form.amount}
+          type="number"
+          name="amount"
+          placeholder="Amount"
+          value={form.amount}
+          onChange={handleChange}
+          className={errors.amount ? "invalid" : ""}
         />
+        <span className="expense-error">{errors.amount || "\u00A0"}</span>      
+    </div>
 
-        <select name="category" onChange={handleChange} value={form.category}>
-            <option value="">Select Category</option>
-            <option value="Food">Food</option>
-            <option value="Transport">Transport</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Other">Other</option>
+      <div>
+        <select
+          name="category"
+          value={form.category}
+          onChange={handleChange}
+          className={errors.category ? "invalid" : ""}
+        >
+          <option value="">Select Category</option>
+          <option value="Food">Food</option>
+          <option value="Transport">Transport</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Other">Other</option>
         </select>
+        <span className="expense-error">{errors.category || "\u00A0"}</span>
+      </div>
 
-        <input type="date" name="date" value={form.date} onChange={handleChange}/>
-
-        <button type="submit">Add Expense</button>
-        </form>
-    )
+      <div>
+        <input
+          type="date"
+          name="date"
+          value={form.date}
+          onChange={handleChange}
+          className={errors.date ? "invalid" : ""}
+        />
+        <span className="expense-error">{errors.date || "\u00A0"}</span>
+      </div>
+      <div>
+         <button type="submit">Add Expense</button>
+        <span className="expense-error">{"\u00A0"}</span>
+      </div>
+      
+      
+    </form>
+  );
 };
 
 export default ExpenseForm;

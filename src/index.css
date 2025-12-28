@@ -77,14 +77,14 @@ button:focus-visible {
 }
 
 .navbar a.active {
-  border-bottom-color: #2563eb; /* only colored when active */
+  border-bottom-color: #2563eb; 
   color: rgb(255, 69, 69);
 }
 
 .expense-form {
   display: flex;
-  gap: 10px; /* space between fields */
-  flex-wrap: wrap; /* wrap to next line if screen is small */
+  gap: 10px; 
+  flex-wrap: wrap; 
   justify-content: center;
   align-items: center;
   margin: 20px auto;
@@ -182,7 +182,6 @@ button:focus-visible {
   flex-wrap: wrap;
 }
 
-/* Common style */
 .expense-filter select,
 .expense-filter input[type="date"] {
   height: 38px;
@@ -195,12 +194,10 @@ button:focus-visible {
   cursor: pointer;
 }
 
-/* Remove ugly date icon spacing (Chrome) */
 .expense-filter input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
-/* Focus state */
 .expense-filter select:focus,
 .expense-filter input[type="date"]:focus {
   outline: none;
@@ -208,7 +205,6 @@ button:focus-visible {
   box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
 }
 
-/* Reset button */
 .expense-filter button {
   height: 38px;
   padding: 0 14px;
@@ -275,6 +271,25 @@ button:focus-visible {
   font-size: 13px;
   opacity: 0.95;
 }
+
+
+
+.expense-error {
+  color: #ef4444;
+  font-size: 0.8rem;
+  min-height: 1em;
+  display: block;
+  margin-top: 2px;
+}
+
+
+.expense-form .invalid {
+  border-color: #ef4444; 
+}
+
+
+
+
 
 
 
