@@ -6,7 +6,7 @@ import ExpenseFilter from "../features/expenses/ExpenseFilter";
 import { useExpenses } from "../context/ExpenseContext";
 
 const Expenses = () => {
-  const { expenses, addExpense, deleteAllExpenses } = useExpenses();
+  const { expenses, addExpense } = useExpenses();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const category = searchParams.get("category") || "";

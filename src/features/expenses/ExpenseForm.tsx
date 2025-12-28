@@ -14,7 +14,8 @@ const ExpenseForm = ({ addExpense }: ExpenseFormProps) => {
 
     const newErrors = {
       title: form.title ? "" : "Title is required",
-      amount: form.amount ? "" : "Amount is required",
+      amount: !form.amount ? "Amount is required" 
+            : Number(form.amount) <= 0 ? "Amount must be greater than zero" : "",
       category: form.category ? "" : "Category is required",
       date: form.date ? "" : "Date is required",
     };
