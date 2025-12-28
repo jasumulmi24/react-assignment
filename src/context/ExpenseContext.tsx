@@ -4,6 +4,7 @@ import type Expense from "../models/expense.type";
 type ExpenseContextType = {
   expenses: Expense[];
   addExpense: (expense: Expense) => void;
+  deleteAllExpenses: () => void;
 };
 
 const ExpenseContext = createContext<ExpenseContextType | undefined>(undefined);
@@ -30,8 +31,13 @@ export const ExpenseProvider = ({ children }: { children: ReactNode }) => {
     setExpenses(prev => [...prev, expense]);
   };
 
+  const deleteAllExpenses = () => {
+    setExpenses([]);
+    localStorage.removeItem("expenses"); // clear local storage
+  };
+
   return (
-    <ExpenseContext.Provider value={{ expenses, addExpense }}>
+    <ExpenseContext.Provider value={{ expenses, addExpense, deleteAllExpenses }}>
       {children}
     </ExpenseContext.Provider>
   );

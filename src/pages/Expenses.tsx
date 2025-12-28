@@ -6,7 +6,7 @@ import ExpenseFilter from "../features/expenses/ExpenseFilter";
 import { useExpenses } from "../context/ExpenseContext";
 
 const Expenses = () => {
-  const { expenses, addExpense } = useExpenses();
+  const { expenses, addExpense, deleteAllExpenses } = useExpenses();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const category = searchParams.get("category") || "";
@@ -31,7 +31,7 @@ const Expenses = () => {
     <>
       <h2>Expense Tracker</h2>
 
-      <ExpenseFilter
+      <ExpenseFilter 
         selectedCategory={category}
         selectedDate={date}
         onFilterChange={handleFilterChange}
