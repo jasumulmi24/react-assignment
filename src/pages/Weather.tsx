@@ -9,31 +9,26 @@ const Weather = () => {
   const BASE_URL = import.meta.env.VITE_OPENWEATHER_BASE_URL;
 
   const { city, setCity, weather, setWeather, loading, setLoading, error, setError } = useWeather();
-  
   const [searchParams, setSearchParams] = useSearchParams();
-  
+
   useEffect(() => {
-  const cityFromUrl = searchParams.get("city") || "";
-  if (cityFromUrl) setCity(cityFromUrl);
+    const cityFromUrl = searchParams.get("city") || "";
+    if (cityFromUrl) setCity(cityFromUrl);
   }, []);
 
   const fetchWeather = async (cityName: string, controller: AbortController) => {
     if (!cityName) return;
 
-   
-
     try {
       setLoading(true);
-        const res = await fetch(
+      const res = await fetch(
         `${BASE_URL}/weather?q=${cityName}&appid=${API_KEY}&units=metric`,
         { signal: controller.signal }
       );
-
       if (!res.ok) throw new Error("City not found");
 
       const data = await res.json();
-
-      const mappedData = {
+      setWeather({
         city: data.name,
         country: data.sys.country,
         temperature: data.main.temp,
@@ -41,12 +36,10 @@ const Weather = () => {
         icon: data.weather[0].icon,
         humidity: data.main.humidity,
         windSpeed: data.wind.speed,
-      };
-
-      setWeather(mappedData);
+      });
       setError("");
     } catch (err: any) {
-      if (err.name === "AbortError") return; 
+      if (err.name === "AbortError") return;
       setError(err.message);
       setWeather(null);
     } finally {
@@ -55,6 +48,8 @@ const Weather = () => {
   };
 
   useEffect(() => {
+    const controller = new AbortController();
+
     if (city.trim() === "") {
       setWeather(null);
       setError("");
@@ -63,7 +58,7 @@ const Weather = () => {
       return;
     }
 
-    const controller = new AbortController();
+    setSearchParams({ city });
 
     const timeout = setTimeout(() => {
       fetchWeather(city, controller);
@@ -71,7 +66,7 @@ const Weather = () => {
 
     return () => {
       clearTimeout(timeout);
-      controller.abort(); 
+      controller.abort();
     };
   }, [city]);
 

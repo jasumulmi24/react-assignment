@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Input from "../../components/Input";
 
 type ExpenseFormProps = {
   addExpense: (expense: { id: string, title: string; amount: number; category: string; date: string }) => void;
@@ -28,69 +29,56 @@ const ExpenseForm = ({ addExpense }: ExpenseFormProps) => {
     setErrors({ title: "", amount: "", category: "", date: "" });
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    setErrors(prev => ({ ...prev, [e.target.name]: "" }));
+ const handleChange = (value: string, name: string) => {
+    setForm(prev => ({ ...prev, [name]: value }));
+    setErrors(prev => ({ ...prev, [name]: "" }));
   };
 
   return (
     <form className="expense-form" onSubmit={handleFormSubmit}>
-      <div>
-        <input
-          type="text"
-          name="title"
-          placeholder="Title"
-          value={form.title}
-          onChange={handleChange}
-          className={errors.title ? "invalid" : ""}
-        />
-        <span className="expense-error">{errors.title || "\u00A0"}</span>
-      </div>
+      <Input
+        name="title"
+        placeholder="Title"
+        value={form.title}
+        onChange={handleChange}
+        error={errors.title}
+      />
 
-      <div>
-        <input
-          type="number"
-          name="amount"
-          placeholder="Amount"
-          value={form.amount}
-          onChange={handleChange}
-          className={errors.amount ? "invalid" : ""}
-        />
-        <span className="expense-error">{errors.amount || "\u00A0"}</span>      
-    </div>
+      <Input
+        name="amount"
+        type="number"
+        placeholder="Amount"
+        value={form.amount}
+        onChange={handleChange}
+        error={errors.amount}
+      />
 
-      <div>
-        <select
-          name="category"
-          value={form.category}
-          onChange={handleChange}
-          className={errors.category ? "invalid" : ""}
-        >
-          <option value="">Select Category</option>
-          <option value="Food">Food</option>
-          <option value="Transport">Transport</option>
-          <option value="Entertainment">Entertainment</option>
-          <option value="Other">Other</option>
-        </select>
-        <span className="expense-error">{errors.category || "\u00A0"}</span>
-      </div>
+      <Input
+        name="category"
+        placeholder="Select Category"
+        value={form.category}
+        onChange={handleChange}
+        error={errors.category}
+        options={[
+          { label: "Food", value: "Food" },
+          { label: "Transport", value: "Transport" },
+          { label: "Entertainment", value: "Entertainment" },
+          { label: "Other", value: "Other" },
+        ]}
+      />
 
-      <div>
-        <input
-          type="date"
-          name="date"
-          value={form.date}
-          onChange={handleChange}
-          className={errors.date ? "invalid" : ""}
-        />
-        <span className="expense-error">{errors.date || "\u00A0"}</span>
-      </div>
-      <div>
-         <button type="submit">Add Expense</button>
+      <Input
+        name="date"
+        type="date"
+        value={form.date}
+        onChange={handleChange}
+        error={errors.date}
+      />
+
+      <div className="form-field">
+        <button type="submit">Add Expense</button>
         <span className="expense-error">{"\u00A0"}</span>
       </div>
-      
-      
     </form>
   );
 };
