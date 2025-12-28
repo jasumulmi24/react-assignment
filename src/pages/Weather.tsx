@@ -4,6 +4,9 @@ import WeatherSearch from "../features/weather/WeatherSearch";
 import { useWeather } from "../context/WeatherContext";
 
 const Weather = () => {
+  const API_KEY = import.meta.env.VITE_API_KEY;
+  const BASE_URL = import.meta.env.VITE_OPENWEATHER_BASE_URL;
+
   const { city, setCity, weather, setWeather, loading, setLoading, error, setError } = useWeather();
 
   const fetchWeather = async (cityName: string, controller: AbortController) => {
@@ -11,8 +14,8 @@ const Weather = () => {
 
     try {
       setLoading(true);
-      const res = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=7a04994c28dfffcb2dc8cc907f066ba2&units=metric`,
+        const res = await fetch(
+        `${BASE_URL}/weather?q=${cityName}&appid=${API_KEY}&units=metric`,
         { signal: controller.signal }
       );
 
