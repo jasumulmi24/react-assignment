@@ -1,11 +1,11 @@
 import { useState } from "react";
 
 type ExpenseFormProps = {
-  addExpense: (expense: { title: string; amount: number; category: string; date: string }) => void;
+  addExpense: (expense: { id: string, title: string; amount: number; category: string; date: string }) => void;
 };
 
 const ExpenseForm = ({ addExpense }: ExpenseFormProps) => {
-  const [form, setForm] = useState({ title: "", amount: "", category: "", date: "" });
+  const [form, setForm] = useState({ id: "", title: "", amount: "", category: "", date: "" });
   const [errors, setErrors] = useState({ title: "", amount: "", category: "", date: "" });
 
   const handleFormSubmit = (e: React.FormEvent) => {
@@ -22,9 +22,9 @@ const ExpenseForm = ({ addExpense }: ExpenseFormProps) => {
 
     if (Object.values(newErrors).some(err => err)) return;
 
-    addExpense({ title: form.title, amount: Number(form.amount), category: form.category, date: form.date });
+    addExpense({ id: crypto.randomUUID(), title: form.title, amount: Number(form.amount), category: form.category, date: form.date });
 
-    setForm({ title: "", amount: "", category: "", date: "" });
+    setForm({ id: "", title: "", amount: "", category: "", date: "" });
     setErrors({ title: "", amount: "", category: "", date: "" });
   };
 

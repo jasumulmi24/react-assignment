@@ -2,15 +2,25 @@ import { useEffect } from "react";
 import WeatherCard from "../features/weather/WeatherCard";
 import WeatherSearch from "../features/weather/WeatherSearch";
 import { useWeather } from "../context/WeatherContext";
+import { useSearchParams } from "react-router-dom";
 
 const Weather = () => {
   const API_KEY = import.meta.env.VITE_API_KEY;
   const BASE_URL = import.meta.env.VITE_OPENWEATHER_BASE_URL;
 
   const { city, setCity, weather, setWeather, loading, setLoading, error, setError } = useWeather();
+  
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+  useEffect(() => {
+  const cityFromUrl = searchParams.get("city") || "";
+  if (cityFromUrl) setCity(cityFromUrl);
+  }, []);
 
   const fetchWeather = async (cityName: string, controller: AbortController) => {
     if (!cityName) return;
+
+   
 
     try {
       setLoading(true);
@@ -48,6 +58,8 @@ const Weather = () => {
     if (city.trim() === "") {
       setWeather(null);
       setError("");
+      searchParams.delete("city");
+      setSearchParams(searchParams);
       return;
     }
 
