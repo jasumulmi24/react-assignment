@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Expenses from './pages/Expenses';
 import Weather from './pages/Weather';
 import NotFound from './pages/NotFound';
+import { WeatherProvider } from './context/WeatherContext';
 
 
 const router = createBrowserRouter([
@@ -33,7 +34,13 @@ const router = createBrowserRouter([
 );
 
 function App() {
-   return <RouterProvider router={router} />;
+   return <>
+    <WeatherProvider>
+         <RouterProvider router={router} />
+    </WeatherProvider>
+   </> 
+ 
+
 }
 
 export default App

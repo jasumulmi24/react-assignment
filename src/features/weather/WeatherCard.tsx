@@ -1,11 +1,10 @@
 import type { WeatherCardProps } from "../../types/WeatherCardProps";
+import { memo } from "react";
 
-const WeatherCard = ({ data }: WeatherCardProps) => {
+const WeatherCard = memo(({ data }: WeatherCardProps) => {
   return (
     <div className="weather-card">
-      <h2>
-        {data.city}, {data.country}
-      </h2>
+      <h2>{data.city}, {data.country}</h2>
 
       <div className="weather-main">
         <img
@@ -23,6 +22,6 @@ const WeatherCard = ({ data }: WeatherCardProps) => {
       </div>
     </div>
   );
-};
+});
 
 export default WeatherCard;
